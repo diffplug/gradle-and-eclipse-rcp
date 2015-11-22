@@ -1,0 +1,148 @@
+buildscript {
+	repositories {
+		// make it easy to test with a local goomph snapshot
+		mavenLocal()
+		// make it easy to test a snapshot version of goomph
+		maven {	url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+		// grab dependencies from the gradle plugin portal
+		maven { url 'https://plugins.gradle.org/m2/' }
+	}
+	// make sure we don't cache stale snapshot versions
+	configurations.all {
+		resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	}
+	dependencies {
+		// a bunch of eclipse stuff
+		classpath "com.diffplug.gradle:goomph:${VER_GOOMPH}"
+		// converts eclipse bundles to maven (deprecated)
+		classpath "org.akhikhl.unpuzzle:unpuzzle-plugin:${VER_UNPUZZLE}"
+		// creates a targetplatform
+		classpath "org.standardout:bnd-platform:${VER_BND_PLATFORM}"
+	}
+}
+
+///////////
+// MAVEN //
+///////////
+subprojects {
+	repositories {
+		mavenCentral()
+		// local eclipse maven (created by Goomph)
+		maven {
+			url "${System.getProperty('user.home')}/.wuff/m2_repository"
+		}
+	}
+}
+
+/////////////////////////////////////////
+// TARGETPLATFORM (initialized lazily) //
+/////////////////////////////////////////
+project(':targetplatform') {
+	// the target platform will contain every jar
+	// which is added to the platform config, as
+	// well as all of its transitives, with OSGi
+	// metadata created automatically by bnd as
+	// required.
+	configurations {
+		platform
+	}
+}
+
+/////////////
+// PLUGINS //
+/////////////
+// tasks to clean and jar all of the plugins
+task cleanPlugins	// clean all
+task jarPlugins		// jar all
+Closure IS_PLUGIN = { it.name.startsWith('org.eclipse.e4.demo.e4photo') }
+configure(subprojects.findAll(IS_PLUGIN)) {
+	def PROJECT_NAME = it.name
+
+	//////////
+	// JAVA //
+	//////////
+	apply plugin: 'java'
+	sourceSets {
+		main { java {
+			srcDir 'src'
+		} }
+		test { java {
+			srcDir 'test'
+		} }
+	}
+	sourceCompatibility = VER_JAVA
+	targetCompatibility = VER_JAVA
+
+	/////////////////////
+	// TARGET PLATFORM //
+	/////////////////////
+	// the targetplatform depends on every project
+	project(':targetplatform').dependencies.add('platform', it)
+	cleanPlugins.dependsOn(clean)
+	jarPlugins.dependsOn(jar)
+	task updateBundle {
+		doLast {
+			File pluginsDir = rootProject.file('targetplatform/build/plugins')
+			// delete old versions of the plugin
+			for (File plugin : pluginsDir.listFiles()) {
+				if (plugin.name.startsWith(jar.baseName + "_") && plugin.name.endsWith('.jar')) {
+					plugin.delete()
+				}
+			}
+			// copy the most recent version
+			org.apache.commons.io.FileUtils.copyFile(
+				jar.archivePath, rootProject.file('targetplatform/build/plugins/' + jar.archiveName.replace('-', '_')));
+		}
+	}
+
+	//////////
+	// OSGI //
+	//////////
+	// create the manifest
+	apply plugin: 'com.diffplug.gradle.osgi.bndmanifest'
+	osgiBndManifest {
+		copyTo 'META-INF/MANIFEST.MF'
+	}
+	// configure the OSGi bundle
+	jar.manifest.attributes(
+		'-exportcontents': 'com.diffplug.*',
+		'-removeheaders': 'Bnd-LastModified,Bundle-Name,Created-By,Tool,Private-Package',
+		'Import-Package': '!javax.annotation.*,*',
+		'Bundle-SymbolicName': "${project.name};singleton:=true",
+		'Bundle-RequiredExecutionEnvironment': 'JavaSE-1.8',
+		'Bundle-ActivationPolicy': 'lazy',
+		'Require-Capability': 'osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"'
+	)
+
+	//////////////////////
+	// ECLIPSE PROJECTS //
+	//////////////////////
+	apply plugin: 'eclipse'
+	// remove the build folder
+	apply plugin: 'com.diffplug.gradle.eclipse.excludebuildfolder'
+	// improve the project deps
+	apply plugin: 'com.diffplug.gradle.eclipse.projectdeps'
+	// handle build.properties correctly
+	apply plugin: 'com.diffplug.gradle.eclipse.buildproperties'
+
+	eclipse {
+		project {
+			natures 'org.eclipse.pde.PluginNature'
+			natures 'org.eclipse.jdt.core.javanature'
+
+			buildCommand 'org.eclipse.jdt.core.javabuilder'
+			buildCommand 'org.eclipse.pde.ManifestBuilder'
+			buildCommand 'org.eclipse.pde.SchemaBuilder'
+		}
+		classpath {
+			downloadSources true
+			downloadJavadoc true
+		}
+		jdt {
+			sourceCompatibility VER_JAVA
+			targetCompatibility VER_JAVA
+		}
+	}
+	// always create "fresh" projects
+	tasks.eclipse.dependsOn(cleanEclipse)
+}

@@ -1,0 +1,40 @@
+import com.diffplug.common.swt.os.*
+
+/////////////////////////////////////////
+// DOWNLOAD ECLIPSE AND PUT INTO MAVEN //
+/////////////////////////////////////////
+apply plugin: 'org.akhikhl.unpuzzle'
+unpuzzle {
+	// mimic wuff
+	localMavenRepositoryDir = new File(System.getProperty('user.home'), '.wuff/m2_repository')
+	unpuzzleDir = new File(System.getProperty('user.home'), '.wuff')
+	eclipseVersion('UNIQUE_' + VER_ECLIPSE) {
+		eclipseMavenGroup = project.eclipseMavenGroup
+		def eclipseMirror = 'http://mirror.netcologne.de/eclipse/eclipse/downloads/drops4'
+		def os = OS.native.winMacLinux('win32', 'macosx-cocoa', 'linux-gtk')
+		def arch = Arch.native.x86x64('', '-x86_64')
+		def extension = OS.native.winMacLinux('zip', 'tar.gz', 'tar.gz')
+		sources {
+			source "${eclipseMirror}/${VER_ECLIPSE_DOWNLOAD}/eclipse-SDK-${VER_ECLIPSE}-${os}${arch}.${extension}"
+			source "${eclipseMirror}/${VER_ECLIPSE_DOWNLOAD}/eclipse-${VER_ECLIPSE}-delta-pack.zip"
+		}
+	}
+	selectedEclipseVersion = 'UNIQUE_' + VER_ECLIPSE
+}
+
+/////////////////////////////
+// WRAP MAVEN DEPS TO OSGI //
+/////////////////////////////
+apply plugin: 'org.standardout.bnd-platform'
+platform {
+	determineImportVersions = true
+	importVersionStrategy = MAJOR
+	useBndHashQualifiers = false
+}
+
+/////////////////////
+// clean and build //
+/////////////////////
+bundles.dependsOn(':jarPlugins')
+task cleanAndBuild(dependsOn: [':cleanPlugins', clean, bundles])
+bundles.mustRunAfter(clean)

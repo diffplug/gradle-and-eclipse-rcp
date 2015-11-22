@@ -1,0 +1,11 @@
+settingsDir.listFiles().each {
+	if (it.name.startsWith('org.eclipse.e4.demo.e4photo')) {
+		include it.name
+	}
+}
+// the targetplatform we're compiling against
+include 'targetplatform'
+// enforce formatting on the whole project
+include 'spotless'
+// the directory where we build the final shipped application
+include 'deploy'
