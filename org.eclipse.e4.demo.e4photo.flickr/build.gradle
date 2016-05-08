@@ -1,0 +1,7 @@
+dependencies {
+	compile project(':org.eclipse.e4.demo.e4photo.flickr.service')
+
+	compile "${eclipseMavenGroup}:javax.inject:+"
+	compile "${eclipseMavenGroup}:org.eclipse.swt:+"
+	compile "${eclipseMavenGroup}:org.eclipse.jface:+"
+}

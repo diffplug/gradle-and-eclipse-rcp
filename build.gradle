@@ -73,6 +73,12 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	sourceCompatibility = VER_JAVA
 	targetCompatibility = VER_JAVA
 
+	// add SWT and the appropriate platform-native SWT for building and testing
+	dependencies {
+		compile "${eclipseMavenGroup}:org.eclipse.swt:+"
+		compile "${eclipseMavenGroup}:org.eclipse.swt.${com.diffplug.common.swt.os.SwtPlatform.getNative()}:+"
+	}
+
 	/////////////////////
 	// TARGET PLATFORM //
 	/////////////////////
