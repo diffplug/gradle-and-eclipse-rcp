@@ -111,13 +111,11 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	}
 	// configure the OSGi bundle
 	jar.manifest.attributes(
-		'-exportcontents': 'com.diffplug.*',
-		'-removeheaders': 'Bnd-LastModified,Bundle-Name,Created-By,Tool,Private-Package',
+		'-exportcontents': 'org.eclipse.*',
+		'-removeheaders': 'Bnd-LastModified,Bundle-Name,Created-By,Tool,Private-Package,Require-Capability',
 		'Import-Package': '!javax.annotation.*,*',
-		'Bundle-SymbolicName': "${project.name};singleton:=true",
-		'Bundle-RequiredExecutionEnvironment': 'JavaSE-1.8',
-		'Bundle-ActivationPolicy': 'lazy',
-		'Require-Capability': 'osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"'
+		'Bundle-SymbolicName': project.name,
+		'Bundle-RequiredExecutionEnvironment': 'J2SE-1.5',
 	)
 
 	//////////////////////
