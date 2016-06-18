@@ -14,8 +14,6 @@ buildscript {
 	dependencies {
 		// a bunch of eclipse stuff
 		classpath "com.diffplug.gradle:goomph:${VER_GOOMPH}"
-		// converts eclipse bundles to maven (deprecated)
-		classpath "org.akhikhl.unpuzzle:unpuzzle-plugin:${VER_UNPUZZLE}"
 		// creates a targetplatform
 		classpath "org.standardout:bnd-platform:${VER_BND_PLATFORM}"
 	}
@@ -29,7 +27,7 @@ subprojects {
 		mavenCentral()
 		// local eclipse maven (created by Goomph)
 		maven {
-			url "${System.getProperty('user.home')}/.wuff/m2_repository"
+			url rootProject.file('targetplatform/build/goomph-p2asmaven/maven')
 		}
 	}
 }
@@ -54,7 +52,7 @@ project(':targetplatform') {
 // tasks to clean and jar all of the plugins
 task cleanPlugins	// clean all
 task jarPlugins		// jar all
-Closure IS_PLUGIN = { it.name.startsWith('org.eclipse.e4.demo.e4photo') }
+Closure IS_PLUGIN = { it.name.startsWith('org.eclipse.e4.demo.e4photo') || it.name.startsWith('needs') }
 configure(subprojects.findAll(IS_PLUGIN)) {
 	def PROJECT_NAME = it.name
 

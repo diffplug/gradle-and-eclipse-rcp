@@ -1,8 +1,14 @@
-settingsDir.listFiles().each {
-	if (it.name.startsWith('org.eclipse.e4.demo.e4photo')) {
-		include it.name
-	}
-}
+// projects which demonstrate the value of OSGi and P2
+include 'needs17'
+include 'needs18'
+include 'needsBoth'
+
+// simple e4 demo application
+include 'org.eclipse.e4.demo.e4photo.flickr'
+include 'org.eclipse.e4.demo.e4photo.flickr.mock'
+include 'org.eclipse.e4.demo.e4photo.flickr.service'
+include 'org.eclipse.e4.demo.e4photo.flickr.service.rest'
+
 // the targetplatform we're compiling against
 include 'targetplatform'
 // enforce formatting on the whole project

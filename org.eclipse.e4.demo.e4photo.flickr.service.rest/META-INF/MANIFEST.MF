@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Bundle-ActivationPolicy: lazy
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-SymbolicName: org.eclipse.e4.demo.e4photo.flickr.service.rest
@@ -8,4 +7,3 @@ Export-Package: org.eclipse.e4.demo.e4photo.flickr.service.rest;uses:=
  "org.eclipse.e4.demo.e4photo.flickr.service";version="1.0.0"
 Import-Package: org.eclipse.e4.demo.e4photo.flickr.service;version="[1
  .0,2)"
-Service-Component: OSGI-INF/component.xml

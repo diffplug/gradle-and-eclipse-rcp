@@ -2,5 +2,8 @@ dependencies {
 	compile project(':org.eclipse.e4.demo.e4photo.flickr')
 
 	compile "${eclipseMavenGroup}:org.eclipse.e4.core.contexts:+"
+	compile "${eclipseMavenGroup}:org.eclipse.e4.core.di:+"
 	compile "${eclipseMavenGroup}:org.eclipse.equinox.app:+"
+	compile "${eclipseMavenGroup}:org.eclipse.osgi:+"
 }
+jar.manifest.attributes('Bundle-SymbolicName': project.name + ';singleton:=true')

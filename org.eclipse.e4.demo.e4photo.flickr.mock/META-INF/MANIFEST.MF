@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
-Bundle-ActivationPolicy: lazy
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-SymbolicName: org.eclipse.e4.demo.e4photo.flickr.mock
+Bundle-SymbolicName: org.eclipse.e4.demo.e4photo.flickr.mock;singleton
+ :=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.eclipse.e4.demo.e4photo.flickr.mock;uses:="org.ecl
  ipse.equinox.app";version="1.0.0"

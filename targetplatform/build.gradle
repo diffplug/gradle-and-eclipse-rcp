@@ -1,27 +1,28 @@
-import com.diffplug.common.swt.os.*
+import com.diffplug.gradle.GoomphCacheLocations
+import com.diffplug.gradle.pde.EclipseRelease
 
 /////////////////////////////////////////
 // DOWNLOAD ECLIPSE AND PUT INTO MAVEN //
 /////////////////////////////////////////
-apply plugin: 'org.akhikhl.unpuzzle'
-unpuzzle {
-	// mimic wuff
-	localMavenRepositoryDir = new File(System.getProperty('user.home'), '.wuff/m2_repository')
-	unpuzzleDir = new File(System.getProperty('user.home'), '.wuff')
-	eclipseVersion('UNIQUE_' + VER_ECLIPSE) {
-		eclipseMavenGroup = project.eclipseMavenGroup
-		def eclipseMirror = 'http://mirror.netcologne.de/eclipse/eclipse/downloads/drops4'
-		def os = OS.native.winMacLinux('win32', 'macosx-cocoa', 'linux-gtk')
-		def arch = Arch.native.x86x64('', '-x86_64')
-		def extension = OS.native.winMacLinux('zip', 'tar.gz', 'tar.gz')
-		sources {
-			source "${eclipseMirror}/${VER_ECLIPSE_DOWNLOAD}/eclipse-SDK-${VER_ECLIPSE}-${os}${arch}.${extension}"
-			source "${eclipseMirror}/${VER_ECLIPSE_DOWNLOAD}/eclipse-${VER_ECLIPSE}-delta-pack.zip"
-		}
-	}
-	selectedEclipseVersion = 'UNIQUE_' + VER_ECLIPSE
+apply plugin: 'com.diffplug.gradle.p2.asmaven'
+p2AsMaven {
+	mavenGroup eclipseMavenGroup
+	p2.addRepo(EclipseRelease.official(GOOMPH_PDE_VER).updateSite())
+	// if we have already downloaded some of the artifacts to our local cache, use them
+	p2.addArtifactRepoBundlePool()
+	p2.addFeature('org.eclipse.equinox.executable')
+	p2.addFeature('org.eclipse.rcp.configuration')
+	p2.addFeature('org.eclipse.e4.rcp')
+	p2.addFeature('org.eclipse.e4.rcp.source')
+	p2.addFeature('org.eclipse.platform')
+	p2.addFeature('org.eclipse.platform.source')
 }
 
+task buildScriptDependencies(type: org.gradle.api.tasks.diagnostics.DependencyReportTask) {
+    configurations = project.buildscript.configurations
+}
+
+/*
 /////////////////////////////
 // WRAP MAVEN DEPS TO OSGI //
 /////////////////////////////
@@ -38,3 +39,4 @@ platform {
 bundles.dependsOn(':jarPlugins')
 task cleanAndBuild(dependsOn: [':cleanPlugins', clean, bundles])
 bundles.mustRunAfter(clean)
+*/
