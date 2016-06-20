@@ -1,0 +1,15 @@
+import com.diffplug.gradle.GoomphCacheLocations
+import com.diffplug.gradle.pde.EclipseRelease
+
+// Download from eclipse and put it into maven
+apply plugin: 'com.diffplug.gradle.p2.asmaven'
+p2AsMaven {
+	mavenGroup 'eclipse-deps'
+	p2.addRepo(EclipseRelease.official('4.5.2').updateSite())
+	p2.addIU('org.eclipse.jdt.core')
+}
+
+dependencies {
+    compile "eclipse-deps:org.eclipse.jdt.core:+"
+    compile "eclipse-deps:org.eclipse.text:+"
+}

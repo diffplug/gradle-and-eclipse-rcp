@@ -10,8 +10,9 @@ include 'org.eclipse.e4.demo.e4photo.flickr.service'
 include 'org.eclipse.e4.demo.e4photo.flickr.service.rest'
 
 // the targetplatform we're compiling against
-include 'targetplatform'
+include 'target.fromp2'
+include 'target.frommaven'
 // enforce formatting on the whole project
-include 'spotless'
+//include 'spotless'
 // the directory where we build the final shipped application
 include 'deploy'

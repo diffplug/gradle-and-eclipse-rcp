@@ -1,0 +1,15 @@
+import com.diffplug.gradle.GoomphCacheLocations
+import com.diffplug.gradle.pde.EclipseRelease
+
+// Download from eclipse and put it into maven
+apply plugin: 'org.standardout.bnd-platform'
+platform {
+    determineImportVersions = true
+    importVersionStrategy = MAJOR
+    useBndHashQualifiers = false
+
+    bnd(group: 'net.sf.ehcache', name: 'ehcache-core') {
+        // make hibernate packages optional
+        optionalImport 'org.hibernate', 'org.hibernate.*'
+    }
+}

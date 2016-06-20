@@ -35,7 +35,7 @@ subprojects {
 /////////////////////////////////////////
 // TARGETPLATFORM (initialized lazily) //
 /////////////////////////////////////////
-project(':targetplatform') {
+project(':target.frommaven') {
 	// the target platform will contain every jar
 	// which is added to the platform config, as
 	// well as all of its transitives, with OSGi
@@ -81,7 +81,7 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	// TARGET PLATFORM //
 	/////////////////////
 	// the targetplatform depends on every project
-	project(':targetplatform').dependencies.add('platform', it)
+	project(':target.frommaven').dependencies.add('platform', it)
 	cleanPlugins.dependsOn(clean)
 	jarPlugins.dependsOn(jar)
 	task updateBundle {
@@ -148,3 +148,21 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	// always create "fresh" projects
 	tasks.eclipse.dependsOn(cleanEclipse)
 }
+
+///////////////
+// SETUP IDE //
+///////////////
+/*
+apply plugin: 'com.diffplug.gradle.oomph.ide'
+oomphIde {
+	p2.addRepo(EclipseRelease.official('4.5.2').updateSite())
+	p2.addRepo('http://download.eclipse.org/buildship/updates/e45/releases/1.0')
+	p2.addIU('org.eclipse.sdk.ide')
+	p2.addFeature('org.eclipse.buildship')
+
+	targetplatform {
+		installation('target.frommaven/build')
+		installation('target.fromp2/build/goomph-p2asmaven/p2')
+	}
+}
+*/
