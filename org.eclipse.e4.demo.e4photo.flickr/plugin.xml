@@ -8,5 +8,17 @@
             uri="xmi/fragment.e4xmi">
       </fragment>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.demo.e4photo.flickr.mock.application"
+            name="org.eclipse.e4.demo.e4photo.flickr.product">
+         <property
+               name="appName"
+               value="org.eclipse.e4.demo.e4photo.flickr.product">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

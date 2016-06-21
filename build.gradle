@@ -27,7 +27,7 @@ subprojects {
 		mavenCentral()
 		// local eclipse maven (created by Goomph)
 		maven {
-			url rootProject.file('targetplatform/build/goomph-p2asmaven/maven')
+			url rootProject.file('target.fromp2/build/goomph-p2asmaven/maven')
 		}
 	}
 }
@@ -73,8 +73,8 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 
 	// add SWT and the appropriate platform-native SWT for building and testing
 	dependencies {
-		compile "${eclipseMavenGroup}:org.eclipse.swt:+"
-		compile "${eclipseMavenGroup}:org.eclipse.swt.${com.diffplug.common.swt.os.SwtPlatform.getNative()}:+"
+		compile "eclipse-deps:org.eclipse.swt:+"
+		compile "eclipse-deps:org.eclipse.swt.${com.diffplug.common.swt.os.SwtPlatform.getNative()}:+"
 	}
 
 	/////////////////////

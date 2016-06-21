@@ -11,5 +11,17 @@
          </run>
       </application>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.demo.e4photo.flickr.mock.application"
+            name="e4photo.product">
+         <property
+               name="appName"
+               value="e4photo.product">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

@@ -1,15 +1,19 @@
-import com.diffplug.gradle.GoomphCacheLocations
-import com.diffplug.gradle.pde.EclipseRelease
-
 // Download from eclipse and put it into maven
 apply plugin: 'org.standardout.bnd-platform'
 platform {
     determineImportVersions = true
     importVersionStrategy = MAJOR
     useBndHashQualifiers = false
+    fetchSources = false
+}
+bundles.dependsOn(clean)
 
-    bnd(group: 'net.sf.ehcache', name: 'ehcache-core') {
-        // make hibernate packages optional
-        optionalImport 'org.hibernate', 'org.hibernate.*'
-    }
+dependencies {
+    // Gradle kicks out all but the newest, and we need both 18 and 17
+    platformaux 'com.google.guava:guava:17.0'
+}
+configurations {
+	// don't wrap any bundles from eclipse, since they've
+	// already got good metadata
+	all*.exclude group: 'eclipse-deps'
 }
