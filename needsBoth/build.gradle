@@ -1,5 +1,0 @@
-dependencies {
-	compile project(':needs17')
-	compile project(':needs18')
-}
-jar.manifest.attributes('-exportcontents': 'needsboth')

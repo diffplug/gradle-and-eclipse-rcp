@@ -1,3 +1,0 @@
-dependencies {
-	compile project(':org.eclipse.e4.demo.e4photo.flickr.service')
-}

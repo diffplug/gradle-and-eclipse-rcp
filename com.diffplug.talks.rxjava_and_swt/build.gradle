@@ -1,0 +1,7 @@
+dependencies {
+	compile "com.diffplug.durian:durian:${VER_DURIAN}"
+	compile "com.diffplug.durian:durian-rx:${VER_DURIAN_RX}"
+	compile "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
+
+	testCompile "junit:junit:${VER_JUNIT}"
+}

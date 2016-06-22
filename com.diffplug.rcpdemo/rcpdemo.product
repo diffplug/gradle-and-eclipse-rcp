@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="RCP Demo" uid="com.diffplug.rcpdemo.product" id="com.diffplug.rcpdemo.product" application="com.diffplug.rcpdemo.application" version="1.0.0" useFeatures="false" includeLaunchers="false">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <launcher name="RcpDemo">
+      <linux icon="/com.diffplug.rcpdemo/images/Goomph.xpm"/>
+      <macosx icon="/com.diffplug.rcpdemo/images/Goomph.icns"/>
+      <solaris/>
+      <win useIco="true">
+         <ico path="/com.diffplug.rcpdemo/images/Goomph.ico"/>
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="com.diffplug.durian"/>
+      <plugin id="com.diffplug.durian.rx"/>
+      <plugin id="com.diffplug.durian.swt"/>
+      <plugin id="com.diffplug.guava.collect"/>
+      <plugin id="com.diffplug.guava.concurrent"/>
+      <plugin id="com.diffplug.guava.core"/>
+      <plugin id="com.diffplug.needs17"/>
+      <plugin id="com.diffplug.needs18"/>
+      <plugin id="com.diffplug.needsBoth"/>
+      <plugin id="com.diffplug.osgi.extension.sun.misc" fragment="true"/>
+      <plugin id="com.diffplug.rcpdemo"/>
+      <plugin id="com.diffplug.talks.rxjava_and_swt"/>
+      <plugin id="com.google.guava" version="18.0.0"/>
+      <plugin id="io.reactivex.rxjava"/>
+      <plugin id="javax.inject"/>
+      <plugin id="javax.servlet"/>
+      <plugin id="javax.xml"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.bidi"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.aix.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.hpux.ia64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc64le" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+   </plugins>
+
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
+
+</product>

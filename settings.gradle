@@ -1,19 +1,18 @@
 // projects which demonstrate the value of OSGi and P2
-include 'needs17'
-include 'needs18'
-include 'needsBoth'
+include 'com.diffplug.needs17'
+include 'com.diffplug.needs18'
+include 'com.diffplug.needsBoth'
 
-// simple e4 demo application
-include 'org.eclipse.e4.demo.e4photo'
-include 'org.eclipse.e4.demo.e4photo.flickr'
-include 'org.eclipse.e4.demo.e4photo.flickr.mock'
-include 'org.eclipse.e4.demo.e4photo.flickr.service'
-include 'org.eclipse.e4.demo.e4photo.flickr.service.rest'
+// snazzy gui to look at
+include 'com.diffplug.talks.rxjava_and_swt'
+
+// simple demo app
+include 'com.diffplug.rcpdemo'
 
 // the targetplatform we're compiling against
 include 'target.fromp2'
 include 'target.frommaven'
 // enforce formatting on the whole project
-//include 'spotless'
+include 'spotless'
 // the directory where we build the final shipped application
 include 'deploy'

@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-SymbolicName: needs17
-Bundle-Version: 1.0.0
-Export-Package: needs17;version="1.0.0"
-Import-Package: com.google.common.base;version="[17.0,18)"

@@ -52,7 +52,7 @@ project(':target.frommaven') {
 // tasks to clean and jar all of the plugins
 task cleanPlugins	// clean all
 task jarPlugins		// jar all
-Closure IS_PLUGIN = { it.name.startsWith('org.eclipse.e4.demo.e4photo') || it.name.startsWith('needs') }
+Closure IS_PLUGIN = { it.name.startsWith('com.diffplug') }
 configure(subprojects.findAll(IS_PLUGIN)) {
 	def PROJECT_NAME = it.name
 
@@ -109,11 +109,14 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	}
 	// configure the OSGi bundle
 	jar.manifest.attributes(
-		'-exportcontents': 'org.eclipse.*',
+		'-exportcontents': 'com.diffplug.*',
 		'-removeheaders': 'Bnd-LastModified,Bundle-Name,Created-By,Tool,Private-Package,Require-Capability',
 		'Import-Package': '!javax.annotation.*,*',
 		'Bundle-SymbolicName': project.name,
-		'Bundle-RequiredExecutionEnvironment': 'J2SE-1.5',
+		'Bundle-RequiredExecutionEnvironment': 'JavaSE-1.8',
+		'Require-Capability': 'osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"',
+		'Bundle-Vendor': 'DiffPlug',
+		'Bundle-License': "http://www.apache.org/licenses/LICENSE-2.0"
 	)
 
 	//////////////////////

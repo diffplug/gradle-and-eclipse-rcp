@@ -1,0 +1,17 @@
+dependencies {
+	compile project(':com.diffplug.needsBoth')
+	compile project(':com.diffplug.talks.rxjava_and_swt')
+
+	compile "eclipse-deps:com.ibm.icu:+"
+	compile "eclipse-deps:org.eclipse.equinox.app:+"
+	compile "eclipse-deps:org.eclipse.equinox.common:+"
+	compile "eclipse-deps:org.eclipse.core.runtime:+"
+
+	compile "eclipse-deps:org.eclipse.swt:+"
+	compile "eclipse-deps:org.eclipse.jface:+"
+
+	compile "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
+
+	testCompile "junit:junit:${VER_JUNIT}"
+}
+jar.manifest.attributes('Bundle-SymbolicName': project.name + ';singleton:=true')

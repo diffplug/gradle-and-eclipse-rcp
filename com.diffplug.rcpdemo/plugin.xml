@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.diffplug.rcpdemo.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.diffplug.rcpdemo.application"
+            name="RCP Demo">
+         <property
+               name="appName"
+               value="RCP Demo">
+         </property>
+         <property
+               name="persistState"
+               value="false">
+         </property>
+         <property
+               name="clearPersistedState"
+               value="true">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

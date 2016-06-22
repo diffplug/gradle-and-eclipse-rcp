@@ -1,0 +1,4 @@
+dependencies {
+	compile "com.google.guava:guava:17.0"
+}
+jar.manifest.attributes('-exportcontents': 'needs17')

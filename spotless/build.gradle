@@ -6,19 +6,15 @@ plugins {
 // FORMATTING //
 ////////////////
 spotless {
-	// We'll disable formatting to make it easy to compare the imported
-	// code against its original source, but we *highly* recommend using
-	// a formatting standard in your own projects.
-
-	// java {
-	// 	target rootProject.fileTree('.') {
-	// 		include '**/*.java'
-	// 		exclude '**/*.license.java'
-	// 	}
-	// 	licenseHeaderFile	rootProject.file('spotless/spotless.license.java')			// License header file
-	// 	importOrderFile		rootProject.file('spotless/spotless.importorder')			// An import ordering file, exported from Eclipse
-	// 	eclipseFormatFile	rootProject.file('spotless/spotless.eclipseformat.xml')		// XML file dumped out by the Eclipse formatter
-	// }
+	java {
+		target rootProject.fileTree('.') {
+			include '**/*.java'
+			exclude '**/*.license.java'
+		}
+		licenseHeaderFile	rootProject.file('spotless/spotless.license.java')			// License header file
+		importOrderFile		rootProject.file('spotless/spotless.importorder')			// An import ordering file, exported from Eclipse
+		eclipseFormatFile	rootProject.file('spotless/spotless.eclipseformat.xml')		// XML file dumped out by the Eclipse formatter
+	}
 	format 'misc', {
 		target rootProject.fileTree('.') {
 			include '**/*.gradle'
