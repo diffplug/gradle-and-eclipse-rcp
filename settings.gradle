@@ -4,6 +4,7 @@ include 'needs18'
 include 'needsBoth'
 
 // simple e4 demo application
+include 'org.eclipse.e4.demo.e4photo'
 include 'org.eclipse.e4.demo.e4photo.flickr'
 include 'org.eclipse.e4.demo.e4photo.flickr.mock'
 include 'org.eclipse.e4.demo.e4photo.flickr.service'

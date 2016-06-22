@@ -5,7 +5,9 @@ import com.diffplug.gradle.pde.EclipseRelease
 apply plugin: 'com.diffplug.gradle.p2.asmaven'
 p2AsMaven {
 	mavenGroup 'eclipse-deps'
+	// use our local cache
 	p2.addArtifactRepoBundlePool()
+	// base RCP platform
 	p2.addRepo(EclipseRelease.official('4.5.2').updateSite())
 	p2.addFeature('org.eclipse.equinox.executable')
 	p2.addFeature('org.eclipse.rcp.configuration')
@@ -13,4 +15,7 @@ p2AsMaven {
 		p2.addFeature("org.eclipse.${it}")
 		p2.addFeature("org.eclipse.${it}.source")
 	}
+	// get the gallery widget from nebula
+	p2.addRepo('http://download.eclipse.org/nebula/releases/1.0.0/')
+	p2.addIU('org.eclipse.nebula.widgets.gallery')
 }
