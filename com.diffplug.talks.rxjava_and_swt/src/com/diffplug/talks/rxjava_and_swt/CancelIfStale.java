@@ -19,18 +19,19 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import com.diffplug.common.base.Box;
+import com.diffplug.common.rx.ForwardingBox;
 
 public class CancelIfStale {
-	private final Box<CompletionStage<?>> delegate = new Box.Default<CompletionStage<?>>(new CompletableFuture<>()) {
+	private final Box<CompletionStage<?>> box = new ForwardingBox<CompletionStage<?>, Box<CompletionStage<?>>>(Box.of(new CompletableFuture<>())) {
 		@Override
 		public void set(CompletionStage<?> obj) {
-			this.obj.toCompletableFuture().cancel(true);
-			this.obj = obj;
+			delegate.get().toCompletableFuture().cancel(true);
+			delegate.set(obj);
 		}
 	};
 
 	public <T> CompletionStage<T> filter(CompletionStage<T> obj) {
-		delegate.set(obj.toCompletableFuture());
+		box.set(obj.toCompletableFuture());
 		return obj;
 	}
 }

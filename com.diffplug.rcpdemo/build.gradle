@@ -3,6 +3,7 @@ dependencies {
 	compile project(':com.diffplug.talks.rxjava_and_swt')
 
 	compile "eclipse-deps:com.ibm.icu:+"
+	compile "eclipse-deps:org.eclipse.osgi:+"
 	compile "eclipse-deps:org.eclipse.equinox.app:+"
 	compile "eclipse-deps:org.eclipse.equinox.common:+"
 	compile "eclipse-deps:org.eclipse.core.runtime:+"

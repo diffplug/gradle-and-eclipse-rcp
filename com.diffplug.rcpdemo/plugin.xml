@@ -3,7 +3,7 @@
 <plugin>
 
    <extension
-         id="application"
+         id="com.diffplug.rcpdemo.application"
          point="org.eclipse.core.runtime.applications">
       <application
             cardinality="singleton-global"
@@ -15,7 +15,7 @@
       </application>
    </extension>
    <extension
-         id="product"
+         id="com.diffplug.rcpdemo.product"
          point="org.eclipse.core.runtime.products">
       <product
             application="com.diffplug.rcpdemo.application"
@@ -31,6 +31,18 @@
          <property
                name="clearPersistedState"
                value="true">
+         </property>
+      </product>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.diffplug.rcpdemo.application"
+            name="RCP Demo">
+         <property
+               name="appName"
+               value="RCP Demo">
          </property>
       </product>
    </extension>

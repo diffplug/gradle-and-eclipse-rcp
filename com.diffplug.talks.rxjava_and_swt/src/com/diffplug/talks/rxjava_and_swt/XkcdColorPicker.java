@@ -81,7 +81,6 @@ public class XkcdColorPicker extends ControlWrapper.AroundControl<Composite> {
 			// set raw
 			colorCompare.setActual(rgb);
 			// clear empty, then start to look for the answer
-			colorCompare.setNearestEmpty();
 			guarded.subscribe(cancelling.filter(xkcdLookup.get(rgb)), entry -> {
 				colorCompare.setNearest(entry.getKey(), entry.getValue());
 			});

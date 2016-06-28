@@ -22,11 +22,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.diffplug.common.base.TreeStream;
 import com.diffplug.common.swt.ControlWrapper;
 import com.diffplug.common.swt.Fonts;
 import com.diffplug.common.swt.Layouts;
 import com.diffplug.common.swt.SwtMisc;
+import com.diffplug.common.tree.TreeStream;
 
 public class ColorComparePanel extends ControlWrapper.AroundControl<Composite> {
 
