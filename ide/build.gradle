@@ -3,7 +3,7 @@
 ///////////////
 apply plugin: 'com.diffplug.gradle.oomph.ide'
 oomphIde {
-	p2.addRepo(com.diffplug.gradle.pde.EclipseRelease.official('4.5.2').updateSite())
+	p2.addRepoEclipse('4.6.0')
 
 	p2.addIU("org.eclipse.platform.ide");	// we want the Eclipse IDE
 	p2.addFeature("org.eclipse.jdt");		// with the Java development tools
