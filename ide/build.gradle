@@ -1,0 +1,24 @@
+///////////////
+// SETUP IDE //
+///////////////
+apply plugin: 'com.diffplug.gradle.oomph.ide'
+oomphIde {
+	p2.addRepo(com.diffplug.gradle.pde.EclipseRelease.official('4.5.2').updateSite())
+
+	p2.addIU("org.eclipse.platform.ide");	// we want the Eclipse IDE
+	p2.addFeature("org.eclipse.jdt");		// with the Java development tools
+	p2.addFeature("org.eclipse.pde");		// and the plugin tools
+
+	eclipseIni {
+		vmargs('-Xmx2g')	// IDE can have 2 gigs of RAM, if it wants
+	}
+
+	addAllProjects()	// we want a project for *everything*
+
+	targetplatform 'goomph-target', {	// our target platform comes from here
+		installation('target.frommaven/build')
+		installation('target.fromp2/build/goomph-p2asmaven/p2')
+	}
+
+	classicTheme()	// oldschool cool
+}

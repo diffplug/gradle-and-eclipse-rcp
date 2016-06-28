@@ -16,3 +16,5 @@ include 'target.frommaven'
 include 'spotless'
 // the directory where we build the final shipped application
 include 'deploy'
+// generate ide for the whole project
+include 'ide'
