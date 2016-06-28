@@ -12,4 +12,6 @@ p2AsMaven {
 	p2.addFeature('org.eclipse.rcp.configuration')
 	p2.addFeature('org.eclipse.platform')
 	p2.addFeature('org.eclipse.platform.source')
+	// also create a runnable copy for PDE build
+	repo2runnable()
 }

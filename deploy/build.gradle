@@ -6,11 +6,12 @@ import com.diffplug.common.swt.os.SwtPlatform
 ////////////////////////////////////////////////
 // Build our application into a P2 repository //
 ////////////////////////////////////////////////
+
 def P2_DIR = 'build/p2'
 
 task buildP2(type: PdeBuildTask) {
 	// set the base platform
-	base(rootProject.file('target.fromp2/build/goomph-p2asmaven/p2'))
+	base(rootProject.file('target.fromp2/build/p2asmaven/p2runnable'))
 	// configure where the projects will come from
 	addPluginPath(rootProject.file('target.frommaven/build'))
 	// and where they will go
@@ -28,7 +29,10 @@ task buildP2(type: PdeBuildTask) {
 	// set the build properties to be appropriate for p2
 	props['p2.build.repo'] = 'file://' + project.file(P2_DIR).absolutePath
 	props['p2.gathering'] =	'true'
+	props['p2.compress'] =	'true'
 	props['skipDirector'] =	'true'
+	props['runPackager'] = 'false'
+	props['groupConfigurations'] = 'true'
 }
 
 P2Model model = new P2Model()
@@ -38,7 +42,7 @@ model.addIU('com.diffplug.rcpdemo.product')
 def createTask(SwtPlatform platform, P2Model model) {
 	def assembleTask = project.task('assemble.' + platform)
 	assembleTask.doLast {
-		def dest = project.file('build/' + platform)
+		def dest = project.file('build/' + platform + (platform.os == 'macosx' ? '.app' : ''))
 		FileMisc.cleanDir(dest)
 		P2Model.DirectorApp director = model.directorApp(dest, 'RcpDemo')
 		director.roaming()

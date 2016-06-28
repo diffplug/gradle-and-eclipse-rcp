@@ -16,9 +16,10 @@ oomphIde {
 	addAllProjects()	// we want a project for *everything*
 
 	targetplatform 'goomph-target', {	// our target platform comes from here
-		installation('target.frommaven/build')
-		installation('target.fromp2/build/goomph-p2asmaven/p2')
+		installation('../target.frommaven/build')
+		installation('../target.fromp2/build/p2asmaven/p2runnable')
 	}
 
 	classicTheme()	// oldschool cool
+	niceText()		// nice fonts and visible whitespace
 }
