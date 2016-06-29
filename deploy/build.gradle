@@ -37,8 +37,8 @@ task buildP2(type: PdeBuildTask) {
 	// p2.compress doesn't work, dunno why
 	doLast {
 		def compressXml = { name ->
-			def xml = project.file(P2_REPO_DIR + "/${name}.xml")
-			def jar = project.file(P2_REPO_DIR + "/${name}.jar")
+			File xml = project.file(P2_REPO_DIR + "/${name}.xml")
+			File jar = project.file(P2_REPO_DIR + "/${name}.jar")
 			ZipMisc.zip(xml, "${name}.xml", jar)
 			xml.delete()
 		}

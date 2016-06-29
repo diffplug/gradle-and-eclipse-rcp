@@ -41,28 +41,15 @@ subprojects {
 	}
 }
 
-/////////////////////////////////////////
-// TARGETPLATFORM (initialized lazily) //
-/////////////////////////////////////////
-project(':target.frommaven') {
-	// the target platform will contain every jar
-	// which is added to the platform config, as
-	// well as all of its transitives, with OSGi
-	// metadata created automatically by bnd as
-	// required.
-	configurations {
-		platform
-	}
-}
-
 /////////////
 // PLUGINS //
 /////////////
 // tasks to clean and jar all of the plugins
-task cleanPlugins	// clean all
-task jarPlugins		// jar all
 Closure IS_PLUGIN = { it.name.startsWith('com.diffplug') }
 configure(subprojects.findAll(IS_PLUGIN)) {
+	// we need the maven repo from p2
+	evaluationDependsOn(':target.fromp2')
+
 	def PROJECT_NAME = it.name
 
 	//////////
@@ -84,28 +71,6 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	dependencies {
 		compile "eclipse-deps:org.eclipse.swt:+"
 		compile "eclipse-deps:org.eclipse.swt.${com.diffplug.common.swt.os.SwtPlatform.getNative()}:+"
-	}
-
-	/////////////////////
-	// TARGET PLATFORM //
-	/////////////////////
-	// the targetplatform depends on every project
-	project(':target.frommaven').dependencies.add('platform', it)
-	cleanPlugins.dependsOn(clean)
-	jarPlugins.dependsOn(jar)
-	task updateBundle {
-		doLast {
-			File pluginsDir = rootProject.file('targetplatform/build/plugins')
-			// delete old versions of the plugin
-			for (File plugin : pluginsDir.listFiles()) {
-				if (plugin.name.startsWith(jar.baseName + "_") && plugin.name.endsWith('.jar')) {
-					plugin.delete()
-				}
-			}
-			// copy the most recent version
-			org.apache.commons.io.FileUtils.copyFile(
-				jar.archivePath, rootProject.file('targetplatform/build/plugins/' + jar.archiveName.replace('-', '_')));
-		}
 	}
 
 	//////////
@@ -159,4 +124,25 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	}
 	// always create "fresh" projects
 	tasks.eclipse.dependsOn(cleanEclipse)
+}
+
+//////////////////////////////////////////////////
+// TARGET.MAVEN depends on every plugin project //
+//////////////////////////////////////////////////
+def pluginPaths = subprojects.collect { ':' + it.name }.grep { it.startsWith(':com.diffplug.') }
+project(':target.frommaven') {
+	// the target platform will contain every jar
+	// which is added to the platform config, as
+	// well as all of its transitives, with OSGi
+	// metadata created automatically by bnd as
+	// required.
+	configurations {
+		platform
+		// no need to add the plugins from p2
+		all*.exclude group: 'eclipse-deps'
+	}
+	for (pluginPath in pluginPaths) {
+		it.evaluationDependsOn(pluginPath)
+		it.dependencies.add('platform', project(pluginPath))
+	}
 }
