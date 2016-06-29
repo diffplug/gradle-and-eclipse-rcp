@@ -26,9 +26,8 @@ Demo project for the [goomph](https://github.com/diffplug/goomph) Gradle plugin,
 
 ### Quickstart
 
-- `gradlew bundles` builds the targetplatform (required first step).
 - `gradlew ide` opens an IDE for manipulating this project.
-- `gradlew assemble.all` creates native launchers for win/mac/linux.
+- `gradlew assemble.all` creates native launchers for win/mac/linux in the `deploy/build` folder.
 
 ### High level layout
 

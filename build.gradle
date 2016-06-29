@@ -1,7 +1,5 @@
 buildscript {
 	repositories {
-		// make it easy to test with a local goomph snapshot
-		mavenLocal()
 		// make it easy to test a snapshot version of goomph
 		maven {	url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 		// grab dependencies from the gradle plugin portal

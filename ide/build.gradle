@@ -23,5 +23,5 @@ oomphIde {
 	classicTheme()	// oldschool cool
 	niceText()		// nice fonts and visible whitespace
 }
-// the IDE will need a targetplatform
-setupIde.dependsOn(':target.maven:bundles')
+// the IDE needs the targetplatform
+ideSetup.dependsOn(':target.maven:bundles')
