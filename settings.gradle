@@ -10,8 +10,8 @@ include 'com.diffplug.talks.rxjava_and_swt'
 include 'com.diffplug.rcpdemo'
 
 // the targetplatform we're compiling against
-include 'target.fromp2'
-include 'target.frommaven'
+include 'target.p2'
+include 'target.maven'
 // enforce formatting on the whole project
 include 'spotless'
 // the directory where we build the final shipped application

@@ -22,10 +22,13 @@ This example project demonstrates building an Eclipse RCP application using the 
 - Two versions of the same library (Guava 17 and 18 at the same time)
 - Generate IDE-as-build-artifact
 
+Demo project for the [goomph](https://github.com/diffplug/goomph) Gradle plugin, also makes heavy use of [bnd-platform](https://github.com/stempler/bnd-platform).
+
 ### Quickstart
 
+- `gradlew bundles` builds the targetplatform (required first step).
 - `gradlew ide` opens an IDE for manipulating this project.
-- `gradlew assembleAll` creates native launchers for win/mac/linux.
+- `gradlew assemble.all` creates native launchers for win/mac/linux.
 
 ### High level layout
 
@@ -36,9 +39,6 @@ The plugins are applied as follows:
 ## Details
 
 See "Gradle and Eclipse RCP.pptx" in this repo for more details.  Based on a talk given at [Gradle Summit 2016](https://gradlesummit.com/schedule/gradle-and-eclipse-rcp) (recording link will be supplied when available).
-
-- `target.frommaven` uses [bnd-platform](https://github.com/stempler/bnd-platform).
-- Other plugins are from [goomph](https://github.com/diffplug/goomph).
 
 ## Acknowledgements
 

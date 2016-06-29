@@ -12,9 +12,9 @@ def P2_DIR = 'build/p2'
 
 task buildP2(type: PdeBuildTask) {
 	// set the base platform
-	base(rootProject.file('target.fromp2/build/p2asmaven/p2runnable'))
+	base(rootProject.file('target.p2/build/p2asmaven/p2runnable'))
 	// configure where the projects will come from
-	addPluginPath(rootProject.file('target.frommaven/build'))
+	addPluginPath(rootProject.file('target.maven/build'))
 	// and where they will go
 	destination(P2_DIR)
 	// specify that this is a product build

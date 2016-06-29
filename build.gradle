@@ -36,7 +36,7 @@ subprojects {
 		}
 		// local eclipse maven (created by Goomph)
 		maven {
-			url rootProject.file('target.fromp2/build/p2asmaven/maven')
+			url rootProject.file('target.p2/build/p2asmaven/maven')
 		}
 	}
 }
@@ -48,7 +48,7 @@ subprojects {
 Closure IS_PLUGIN = { it.name.startsWith('com.diffplug') }
 configure(subprojects.findAll(IS_PLUGIN)) {
 	// we need the maven repo from p2
-	evaluationDependsOn(':target.fromp2')
+	evaluationDependsOn(':target.p2')
 
 	def PROJECT_NAME = it.name
 
@@ -130,7 +130,7 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 // TARGET.MAVEN depends on every plugin project //
 //////////////////////////////////////////////////
 def pluginPaths = subprojects.collect { ':' + it.name }.grep { it.startsWith(':com.diffplug.') }
-project(':target.frommaven') {
+project(':target.maven') {
 	// the target platform will contain every jar
 	// which is added to the platform config, as
 	// well as all of its transitives, with OSGi
