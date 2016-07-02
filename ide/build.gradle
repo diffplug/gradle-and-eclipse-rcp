@@ -3,25 +3,22 @@
 ///////////////
 apply plugin: 'com.diffplug.gradle.oomph.ide'
 oomphIde {
-	p2.addRepoEclipse('4.6.0')
-
-	p2.addIU("org.eclipse.platform.ide");	// we want the Eclipse IDE
-	p2.addFeature("org.eclipse.jdt");		// with the Java development tools
-	p2.addFeature("org.eclipse.pde");		// and the plugin tools
-
+	splash '../_imgs/titlecard.png'
+	pde {
+		targetplatform {
+			it.installation '../target.maven/build'
+			it.installation '../target.p2/build/p2asmaven/p2runnable'
+		}
+	}
+	style {
+		classicTheme()	// oldschool cool
+		niceText()		// nice fonts and visible whitespace
+	}
 	eclipseIni {
 		vmargs('-Xmx2g')	// IDE can have 2 gigs of RAM, if it wants
 	}
 
 	addAllProjects()	// we want a project for *everything*
-
-	targetplatform 'goomph-target', {	// our target platform comes from here
-		installation('../target.maven/build')
-		installation('../target.p2/build/p2asmaven/p2runnable')
-	}
-
-	classicTheme()	// oldschool cool
-	niceText()		// nice fonts and visible whitespace
 }
 // the IDE needs the targetplatform
 ideSetup.dependsOn(':target.maven:bundles')
