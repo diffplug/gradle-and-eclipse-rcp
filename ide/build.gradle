@@ -19,6 +19,10 @@ oomphIde {
 	}
 
 	addAllProjects()	// we want a project for *everything*
+
+	// add syntax highlighting for gradle scripts
+	p2.addRepo('http://www.nodeclipse.org/updates/gradle-ide-pack/')
+	p2.addFeature('org.nodeclipse.enide.editors.gradle.feature')
 }
 // the IDE needs the targetplatform
-ideSetup.dependsOn(':target.maven:bundles')
+ideSetupWorkspace.dependsOn(':target.maven:bundles')
