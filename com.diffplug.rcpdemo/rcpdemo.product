@@ -30,7 +30,6 @@
       <plugin id="com.diffplug.durian.collect"/>
       <plugin id="com.diffplug.durian.concurrent"/>
       <plugin id="com.diffplug.durian.core"/>
-      <plugin id="com.diffplug.durian.debug"/>
       <plugin id="com.diffplug.durian.rx"/>
       <plugin id="com.diffplug.durian.swt"/>
       <plugin id="com.diffplug.needs17"/>
