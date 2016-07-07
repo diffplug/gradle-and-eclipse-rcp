@@ -144,3 +144,11 @@ project(':target.maven') {
 		it.dependencies.add('platform', project(pluginPath))
 	}
 }
+
+/////////////////////////////////////////////////////////
+// Root eclipse project for tinkering with build files //
+/////////////////////////////////////////////////////////
+apply plugin: 'com.diffplug.gradle.eclipse.resourcefilters'
+eclipseResourceFilters {
+	exclude().folders().name('com.diffplug.*')
+}
