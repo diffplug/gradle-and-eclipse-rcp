@@ -3,15 +3,12 @@ import com.diffplug.gradle.pde.EclipseRelease
 // Download from eclipse and put it into maven
 apply plugin: 'com.diffplug.gradle.p2.asmaven'
 p2AsMaven {
-	mavenGroup 'eclipse-deps'
-	// use our local cache
-	p2.addArtifactRepoBundlePool()
-	// base RCP platform
-	p2.addRepo(EclipseRelease.official('4.5.2').updateSite())
-	p2.addFeature('org.eclipse.equinox.executable')
-	p2.addFeature('org.eclipse.rcp.configuration')
-	p2.addFeature('org.eclipse.platform')
-	p2.addFeature('org.eclipse.platform.source')
-	// also create a runnable copy for PDE build
-	repo2runnable()
+	group 'eclipse-deps', {
+		repoEclipse '4.5.2'
+		feature 'org.eclipse.equinox.executable'
+		feature 'org.eclipse.rcp.configuration'
+		feature 'org.eclipse.platform'
+		feature 'org.eclipse.platform.source'
+		repo2runnable()
+	}
 }

@@ -4,10 +4,11 @@
 apply plugin: 'com.diffplug.gradle.oomph.ide'
 oomphIde {
 	splash '../_imgs/titlecard.png'
+	repoEclipse '4.6.0'
 	pde {
 		targetplatform {
 			it.installation '../target.maven/build'
-			it.installation '../target.p2/build/p2asmaven/p2runnable'
+			it.installation '../target.p2/build/p2asmaven/p2runnable/eclipse-deps'
 		}
 	}
 	style {
@@ -21,8 +22,8 @@ oomphIde {
 	addAllProjects()	// we want a project for *everything*
 
 	// add syntax highlighting for gradle scripts
-	p2.addRepo('http://www.nodeclipse.org/updates/gradle-ide-pack/')
-	p2.addFeature('org.nodeclipse.enide.editors.gradle.feature')
+	repo    'http://www.nodeclipse.org/updates/gradle-ide-pack/'
+	feature 'org.nodeclipse.enide.editors.gradle.feature'
 }
 // the IDE needs the targetplatform
 ideSetupWorkspace.dependsOn(':target.maven:bundles')
