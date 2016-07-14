@@ -11,6 +11,7 @@ build/
 .classpath
 .settings/
 bin/
+target.p2/workspace/
 
 # PPT stuff
 ~*

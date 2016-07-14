@@ -1,19 +1,11 @@
-# Contributing to this talk
+# Contributing to this demo
 
 Pull requests are welcome, preferably against `master`.
 
 ## Build instructions
 
-It's a bog-standard gradle build.
-
-`gradlew eclipse`
-* creates an Eclipse project file for you.
-
-`gradlew build`
-* builds the jar
-* runs FindBugs
-* checks the formatting
-* runs the tests
+- `gradlew ide` opens an IDE for manipulating this project.
+- `gradlew assemble.all` creates native launchers for win/mac/linux in the `deploy/build` folder.
 
 If you're getting style warnings, `gradlew spotlessApply` will apply anything necessary to fix formatting. For more info on the formatter, check out [spotless](https://github.com/diffplug/spotless).
 
