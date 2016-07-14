@@ -37,7 +37,7 @@ The plugins are applied as follows:
 
 ## Details
 
-See "Gradle and Eclipse RCP.pptx" in this repo for more details.  Based on a talk given at [Gradle Summit 2016](https://gradlesummit.com/schedule/gradle-and-eclipse-rcp) (recording link will be supplied when available).
+See "Gradle and Eclipse RCP.pptx" in this repo for more details.  Based on a talk given at [Gradle Summit 2016](https://gradlesummit.com/schedule/gradle-and-eclipse-rcp) ([video](https://www.youtube.com/watch?v=PIC6YeRkRlo&feature=youtu.be)).
 
 ## Acknowledgements
 
