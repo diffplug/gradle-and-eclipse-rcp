@@ -60,6 +60,7 @@ def createTask(SwtPlatform platform, P2Model model) {
 		P2Model.DirectorApp director = model.directorApp(dest, 'RcpDemo')
 		director.roaming()
 		director.platform(platform)
+		director.installFeatures()
 		director.runUsingBootstrapper(project)
 	}
 	return assembleTask
