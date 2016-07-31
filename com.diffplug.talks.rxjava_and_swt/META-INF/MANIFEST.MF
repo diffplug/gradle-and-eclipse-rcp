@@ -4,7 +4,7 @@ Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-SymbolicName: com.diffplug.talks.rxjava_and_swt
 Bundle-Vendor: DiffPlug
-Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Version: 1.0.0
 Export-Package: com.diffplug.talks.rxjava_and_swt;uses:="com.diffplug.
  common.swt,org.eclipse.swt.graphics,org.eclipse.swt.widgets,rx";versi
  on="1.0.0"

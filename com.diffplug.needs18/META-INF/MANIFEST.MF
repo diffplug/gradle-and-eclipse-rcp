@@ -4,6 +4,6 @@ Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-SymbolicName: com.diffplug.needs18
 Bundle-Vendor: DiffPlug
-Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Version: 1.0.0
 Export-Package: needs18;version="1.0.0"
 Import-Package: com.google.common.util.concurrent;version="[18.0,19)"
