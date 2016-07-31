@@ -10,7 +10,7 @@ import com.diffplug.common.swt.os.SwtPlatform
 
 def P2_DIR = 'build/p2'
 
-task buildP2(type: PdeBuildTask) {
+task buildP2(type: PdeBuildTask, dependsOn: ':target.maven:bundles') {
 	// set the base platform
 	base(rootProject.file('target.p2/build/p2asmaven/p2runnable/eclipse-deps'))
 	// configure where the plugins will come from
