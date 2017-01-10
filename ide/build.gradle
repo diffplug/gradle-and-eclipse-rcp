@@ -4,7 +4,7 @@
 apply plugin: 'com.diffplug.gradle.oomph.ide'
 oomphIde {
 	splash '../_imgs/titlecard.png'
-	repoEclipse '4.6.0'
+	repoEclipse '4.6.2'
 	pde {
 		targetplatform {
 			it.installation '../target.maven/build'
@@ -21,9 +21,10 @@ oomphIde {
 
 	addAllProjects()	// we want a project for *everything*
 
-	// add syntax highlighting for gradle scripts
-	repo    'http://www.nodeclipse.org/updates/gradle-ide-pack/'
-	feature 'org.nodeclipse.enide.editors.gradle.feature'
+	thirdParty {
+		minimalistGradleEditor {}	// add syntax highlighting for gradle scripts
+		tmTerminal {}				// adds an in-eclipse terminal
+	}
 }
 // the IDE needs the targetplatform
 ideSetupWorkspace.dependsOn(':target.maven:bundles')
