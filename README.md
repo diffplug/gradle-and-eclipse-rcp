@@ -10,7 +10,7 @@ output = [
 -->
 [![Latest version](https://img.shields.io/badge/latest-1.0.0-blue.svg)](https://github.com/diffplug/gradle_and_eclipse_rcp/releases/latest)
 [![License Apache](https://img.shields.io/badge/license-Apache-blue.svg)](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-[![Changelog](https://img.shields.io/badge/changelog-1.0.0--SNAPSHOT-brightgreen.svg)](CHANGES.md)
+[![Changelog](https://img.shields.io/badge/changelog-1.0.0-brightgreen.svg)](CHANGES.md)
 [![Travis CI](https://travis-ci.org/diffplug/gradle_and_eclipse_rcp.svg?branch=master)](https://travis-ci.org/diffplug/gradle_and_eclipse_rcp)
 <!---freshmark /shields -->
 

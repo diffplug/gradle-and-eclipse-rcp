@@ -14,12 +14,17 @@ buildscript {
 		classpath "com.diffplug.gradle:goomph:${VER_GOOMPH}"
 		// creates a targetplatform
 		classpath "org.standardout:bnd-platform:${VER_BND_PLATFORM}"
+		// apply spotless
+		classpath "com.diffplug.spotless:spotless-plugin-gradle:${VER_SPOTLESS}"
 	}
 }
 
 ///////////
 // MAVEN //
 ///////////
+repositories {
+	mavenCentral()
+}
 subprojects {
 	repositories {
 		mavenCentral()
@@ -27,9 +32,6 @@ subprojects {
 		if (project.version.endsWith('SNAPSHOT')) {
 			maven {
 				url 'https://oss.sonatype.org/content/repositories/snapshots/'
-			}
-			configurations.all {
-				resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 			}
 		}
 		// local eclipse maven (created by Goomph)
@@ -122,6 +124,11 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	}
 	// always create "fresh" projects
 	tasks.eclipse.dependsOn(cleanEclipse)
+}
+
+// formatting
+allprojects {
+	apply from: rootProject.file('gradle/spotless/spotless.gradle')
 }
 
 /////////////////////////////////////////////////////////
