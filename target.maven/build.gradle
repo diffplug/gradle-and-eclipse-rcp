@@ -1,3 +1,27 @@
+/////////////////////////////
+// WRAP MAVEN DEPS TO OSGI //
+/////////////////////////////
+
+// find the paths of all actual projects
+def pluginPaths = rootProject.subprojects
+	.collect { ':' + it.name }
+	.grep { it.startsWith(':com.diffplug.') }
+
+// the target platform will contain every jar
+// which is added to the platform config, as
+// well as all of its transitives, with OSGi
+// metadata created automatically by bnd as
+// required.
+configurations {
+	platform
+	// no need to add the plugins from p2
+	all*.exclude group: 'eclipse-deps'
+}
+for (pluginPath in pluginPaths) {
+	evaluationDependsOn(pluginPath)
+	dependencies.add('platform', project(pluginPath))
+}
+
 // Download from eclipse and put it into maven
 apply plugin: 'org.standardout.bnd-platform'
 platform {
@@ -12,6 +36,10 @@ bundles.dependsOn(clean)
 configurations.collectMany { it.allDependencies }.findAll { it instanceof ProjectDependency }.each {
 	bundles.dependsOn(it.dependencyProject.path + ':jar')
 }
+
+// put the bundle task into the output of `gradle tasks` since Gradle 3.3 includes only tasks with a group
+bundles.group = 'Build'
+bundles.description = 'Converts maven dependencies into OSGi bundles.'
 
 dependencies {
 	// Gradle kicks out all but the newest, and we need both 18 and 17

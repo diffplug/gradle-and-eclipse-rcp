@@ -124,27 +124,6 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	tasks.eclipse.dependsOn(cleanEclipse)
 }
 
-//////////////////////////////////////////////////
-// TARGET.MAVEN depends on every plugin project //
-//////////////////////////////////////////////////
-def pluginPaths = subprojects.collect { ':' + it.name }.grep { it.startsWith(':com.diffplug.') }
-project(':target.maven') {
-	// the target platform will contain every jar
-	// which is added to the platform config, as
-	// well as all of its transitives, with OSGi
-	// metadata created automatically by bnd as
-	// required.
-	configurations {
-		platform
-		// no need to add the plugins from p2
-		all*.exclude group: 'eclipse-deps'
-	}
-	for (pluginPath in pluginPaths) {
-		it.evaluationDependsOn(pluginPath)
-		it.dependencies.add('platform', project(pluginPath))
-	}
-}
-
 /////////////////////////////////////////////////////////
 // Root eclipse project for tinkering with build files //
 /////////////////////////////////////////////////////////
