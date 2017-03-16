@@ -35,11 +35,11 @@ The plugins are applied as follows:
 
 ![Project layout](_imgs/project_layout.png)
 
-## Details
+## Talks
 
 See "Gradle and Eclipse RCP.pptx" in this repo for more details.  Based on a talk given at [Gradle Summit 2016](https://gradlesummit.com/schedule/gradle-and-eclipse-rcp) ([video](https://www.youtube.com/watch?v=PIC6YeRkRlo&feature=youtu.be)).
 
-Currently a talk proposal (that you can vote on ;-) for [EclipseConverge 2017](https://www.eclipseconverge.org/na2017/session/gradle-and-eclipse-ide-build-artifact?utm_source=dlvr.it&utm_medium=twitter).
+A second talk based on this work will be given at [EclipseConverge 2017](https://www.eclipseconverge.org/na2017/session/gradle-and-eclipse-ide-build-artifact).
 
 ## Acknowledgements
 
