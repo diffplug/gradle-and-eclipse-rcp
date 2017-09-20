@@ -15,6 +15,18 @@
       </application>
    </extension>
    <extension
+         id="com.diffplug.rcpdemo.headlessapp"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.diffplug.rcpdemo.HeadlessApp">
+         </run>
+      </application>
+   </extension>
+   <extension
          id="com.diffplug.rcpdemo.product"
          point="org.eclipse.core.runtime.products">
       <product
