@@ -4,7 +4,7 @@ spotless {
 		java {
 			licenseHeaderFile	rootProject.file('gradle/spotless/spotless.license.java')			// License header file
 			importOrderFile		rootProject.file('gradle/spotless/spotless.importorder')			// An import ordering file, exported from Eclipse
-			eclipseFormatFile	rootProject.file('gradle/spotless/spotless.eclipseformat.xml')		// XML file dumped out by the Eclipse formatter
+			eclipse().configFile rootProject.file('gradle/spotless/spotless.eclipseformat.xml')		// XML file dumped out by the Eclipse formatter
 			removeUnusedImports()
 		}
 	}

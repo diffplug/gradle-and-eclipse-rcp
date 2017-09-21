@@ -1,3 +1,18 @@
+def runtimeDeps = [
+'org.eclipse.osgi',
+'org.eclipse.update.configurator',
+'org.eclipse.equinox.ds',
+'org.eclipse.equinox.registry',
+'org.eclipse.core.commands',
+'javax.annotation',
+'javax.inject',
+'org.eclipse.core.jobs',
+'org.eclipse.equinox.preferences',
+'org.eclipse.core.contenttype',
+'org.eclipse.equinox.util',
+'org.eclipse.osgi.services'
+]
+
 dependencies {
 	compile project(':com.diffplug.needsBoth')
 	compile project(':com.diffplug.talks.rxjava_and_swt')
@@ -14,5 +29,25 @@ dependencies {
 	compile "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
 
 	testCompile "junit:junit:${VER_JUNIT}"
+
+	runtime 'com.diffplug.osgi:com.diffplug.osgi.extension.sun.misc:0.0.0'
+	runtimeDeps.each {
+		runtime "eclipse-deps:${it}:+"
+	}
 }
 jar.manifest.attributes('Bundle-SymbolicName': project.name + ';singleton:=true')
+
+//////////////////////
+// Run headless app //
+//////////////////////
+apply plugin: 'com.diffplug.gradle.equinoxlaunch'
+equinoxLaunch {
+	headlessAppSetup {
+		source.addThisProject()
+		source.addMaven('com.google.guava:guava:17.0')
+		source.addMaven('com.google.guava:guava:18.0')
+		launchTask 'headlessApp', {
+			it.args = ['-consoleLog', '-application', 'com.diffplug.rcpdemo.headlessapp', 'file', 'test']
+		}
+	}
+}
