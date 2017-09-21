@@ -1,6 +1,5 @@
 buildscript {
 	repositories {
-		mavenLocal()
 		// make it easy to test a snapshot version of goomph
 		maven {	url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 		// grab dependencies from the gradle plugin portal
@@ -138,4 +137,17 @@ allprojects {
 apply plugin: 'com.diffplug.gradle.eclipse.resourcefilters'
 eclipseResourceFilters {
 	exclude().folders().name('com.diffplug.*')
+}
+
+
+/////////////////////////////
+// Setup a headless launch //
+/////////////////////////////
+apply plugin: 'com.diffplug.gradle.equinoxlaunch'
+equinoxLaunch {
+	codegenSetup {
+		source.addProject(project(':com.diffplug.rcpdemo'))
+		source.addMaven('com.google.guava:guava:17.0')
+		source.addMaven('com.google.guava:guava:18.0')
+	}
 }

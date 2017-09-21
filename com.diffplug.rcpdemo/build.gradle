@@ -40,14 +40,6 @@ jar.manifest.attributes('Bundle-SymbolicName': project.name + ';singleton:=true'
 //////////////////////
 // Run headless app //
 //////////////////////
-apply plugin: 'com.diffplug.gradle.equinoxlaunch'
-equinoxLaunch {
-	headlessAppSetup {
-		source.addThisProject()
-		source.addMaven('com.google.guava:guava:17.0')
-		source.addMaven('com.google.guava:guava:18.0')
-		launchTask 'headlessApp', {
-			it.args = ['-consoleLog', '-application', 'com.diffplug.rcpdemo.headlessapp', 'file', 'test']
-		}
-	}
-}
+def codegenSetup = tasks.getByPath(':codegenSetup')
+def thisLaunch = codegenSetup.launchTask(project, 'thisLaunch')
+thisLaunch.args = ['-consoleLog', '-application', 'com.diffplug.rcpdemo.headlessapp', 'file', 'test']
