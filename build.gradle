@@ -77,7 +77,7 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	// OSGI //
 	//////////
 	// create the manifest
-	apply plugin: 'com.diffplug.gradle.osgi.bndmanifest'
+	apply plugin: 'com.diffplug.osgi.bndmanifest'
 	osgiBndManifest {
 		copyTo 'META-INF/MANIFEST.MF'
 	}
@@ -98,11 +98,11 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	//////////////////////
 	apply plugin: 'eclipse'
 	// remove the build folder
-	apply plugin: 'com.diffplug.gradle.eclipse.excludebuildfolder'
+	apply plugin: 'com.diffplug.eclipse.excludebuildfolder'
 	// improve the project deps
-	apply plugin: 'com.diffplug.gradle.eclipse.projectdeps'
+	apply plugin: 'com.diffplug.eclipse.projectdeps'
 	// handle build.properties correctly
-	apply plugin: 'com.diffplug.gradle.eclipse.buildproperties'
+	apply plugin: 'com.diffplug.eclipse.buildproperties'
 
 	eclipse {
 		project {
@@ -134,7 +134,7 @@ allprojects {
 /////////////////////////////////////////////////////////
 // Root eclipse project for tinkering with build files //
 /////////////////////////////////////////////////////////
-apply plugin: 'com.diffplug.gradle.eclipse.resourcefilters'
+apply plugin: 'com.diffplug.eclipse.resourcefilters'
 eclipseResourceFilters {
 	exclude().folders().name('com.diffplug.*')
 }
@@ -143,7 +143,7 @@ eclipseResourceFilters {
 /////////////////////////////
 // Setup a headless launch //
 /////////////////////////////
-apply plugin: 'com.diffplug.gradle.equinoxlaunch'
+apply plugin: 'com.diffplug.osgi.equinoxlaunch'
 equinoxLaunch {
 	codegenSetup {
 		source.addProject(project(':com.diffplug.rcpdemo'))
