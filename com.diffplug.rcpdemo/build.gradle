@@ -14,25 +14,27 @@ def runtimeDeps = [
 ]
 
 dependencies {
-	compile project(':com.diffplug.needsBoth')
-	compile project(':com.diffplug.talks.rxjava_and_swt')
+	implementation project(':com.diffplug.needsBoth')
+	implementation project(':com.diffplug.talks.rxjava_and_swt')
 
-	compile "eclipse-deps:com.ibm.icu:+"
-	compile "eclipse-deps:org.eclipse.osgi:+"
-	compile "eclipse-deps:org.eclipse.equinox.app:+"
-	compile "eclipse-deps:org.eclipse.equinox.common:+"
-	compile "eclipse-deps:org.eclipse.core.runtime:+"
+	implementation "eclipse-deps:com.ibm.icu:+"
+	implementation "eclipse-deps:org.eclipse.osgi:+"
+	implementation "eclipse-deps:org.eclipse.equinox.app:+"
+	implementation "eclipse-deps:org.eclipse.equinox.common:+"
+	implementation "eclipse-deps:org.eclipse.core.runtime:+"
 
-	compile "eclipse-deps:org.eclipse.swt:+"
-	compile "eclipse-deps:org.eclipse.jface:+"
+	implementation "eclipse-deps:org.eclipse.swt:+"
+	implementation "eclipse-deps:org.eclipse.jface:+"
 
-	compile "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
+	implementation "com.diffplug.durian:durian-core:${VER_DURIAN}"
+	implementation "com.diffplug.durian:durian-collect:${VER_DURIAN}"
+	implementation "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
+	implementation "com.google.guava:guava:17.0"
+	testImplementation "junit:junit:${VER_JUNIT}"
 
-	testCompile "junit:junit:${VER_JUNIT}"
-
-	runtime 'com.diffplug.osgi:com.diffplug.osgi.extension.sun.misc:0.0.0'
+	runtimeOnly 'com.diffplug.osgi:com.diffplug.osgi.extension.sun.misc:0.0.0'
 	runtimeDeps.each {
-		runtime "eclipse-deps:${it}:+"
+		runtimeOnly "eclipse-deps:${it}:+"
 	}
 }
 jar.manifest.attributes('Bundle-SymbolicName': project.name + ';singleton:=true')

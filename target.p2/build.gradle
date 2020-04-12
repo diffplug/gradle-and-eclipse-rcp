@@ -1,7 +1,7 @@
 import com.diffplug.gradle.pde.EclipseRelease
 
 // Download from eclipse and put it into maven
-apply plugin: 'com.diffplug.gradle.p2.asmaven'
+apply plugin: 'com.diffplug.p2.asmaven'
 p2AsMaven {
 	group 'eclipse-deps', {
 		repoEclipse '4.5.2'

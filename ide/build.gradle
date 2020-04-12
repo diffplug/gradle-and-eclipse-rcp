@@ -1,10 +1,10 @@
 ///////////////
 // SETUP IDE //
 ///////////////
-apply plugin: 'com.diffplug.gradle.oomph.ide'
+apply plugin: 'com.diffplug.oomph.ide'
 oomphIde {
 	splash '../_imgs/titlecard.png'
-	repoEclipse '4.6.2'
+	repoEclipseLatest()
 	pde {
 		targetplatform {
 			it.installation '../target.maven/build'
@@ -22,7 +22,7 @@ oomphIde {
 	addAllProjects()	// we want a project for *everything*
 
 	thirdParty {
-		minimalistGradleEditor {}	// add syntax highlighting for gradle scripts
+		//minimalistGradleEditor {}	// add syntax highlighting for gradle scripts
 		tmTerminal {}				// adds an in-eclipse terminal
 	}
 }

@@ -25,7 +25,10 @@ buildscript {
 repositories {
 	mavenCentral()
 }
+
+apply from: rootProject.file('gradle/spotless/spotless.gradle')
 subprojects {
+	apply from: rootProject.file('gradle/spotless/spotless.gradle')
 	repositories {
 		mavenCentral()
 		// SNAPSHOT versions are free to rely on other SNAPSHOT libraries
@@ -37,6 +40,10 @@ subprojects {
 		// local eclipse maven (created by Goomph)
 		maven {
 			url rootProject.file('target.p2/build/p2asmaven/maven')
+			metadataSources {
+				mavenPom()
+				artifact()
+			}
 		}
 	}
 }
@@ -69,15 +76,15 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 
 	// add SWT and the appropriate platform-native SWT for building and testing
 	dependencies {
-		compile "eclipse-deps:org.eclipse.swt:+"
-		compile "eclipse-deps:org.eclipse.swt.${com.diffplug.common.swt.os.SwtPlatform.getNative()}:+"
+		implementation "eclipse-deps:org.eclipse.swt:+"
+		implementation "eclipse-deps:org.eclipse.swt.${com.diffplug.common.swt.os.SwtPlatform.getNative()}:+"
 	}
 
 	//////////
 	// OSGI //
 	//////////
 	// create the manifest
-	apply plugin: 'com.diffplug.gradle.osgi.bndmanifest'
+	apply plugin: 'com.diffplug.osgi.bndmanifest'
 	osgiBndManifest {
 		copyTo 'META-INF/MANIFEST.MF'
 	}
@@ -98,11 +105,11 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	//////////////////////
 	apply plugin: 'eclipse'
 	// remove the build folder
-	apply plugin: 'com.diffplug.gradle.eclipse.excludebuildfolder'
+	apply plugin: 'com.diffplug.eclipse.excludebuildfolder'
 	// improve the project deps
-	apply plugin: 'com.diffplug.gradle.eclipse.projectdeps'
+	apply plugin: 'com.diffplug.eclipse.projectdeps'
 	// handle build.properties correctly
-	apply plugin: 'com.diffplug.gradle.eclipse.buildproperties'
+	apply plugin: 'com.diffplug.eclipse.buildproperties'
 
 	eclipse {
 		project {
@@ -126,15 +133,10 @@ configure(subprojects.findAll(IS_PLUGIN)) {
 	tasks.eclipse.dependsOn(cleanEclipse)
 }
 
-// formatting
-allprojects {
-	apply from: rootProject.file('gradle/spotless/spotless.gradle')
-}
-
 /////////////////////////////////////////////////////////
 // Root eclipse project for tinkering with build files //
 /////////////////////////////////////////////////////////
-apply plugin: 'com.diffplug.gradle.eclipse.resourcefilters'
+apply plugin: 'com.diffplug.eclipse.resourcefilters'
 eclipseResourceFilters {
 	exclude().folders().name('com.diffplug.*')
 }
@@ -143,7 +145,7 @@ eclipseResourceFilters {
 /////////////////////////////
 // Setup a headless launch //
 /////////////////////////////
-apply plugin: 'com.diffplug.gradle.equinoxlaunch'
+apply plugin: 'com.diffplug.osgi.equinoxlaunch'
 equinoxLaunch {
 	codegenSetup {
 		source.addProject(project(':com.diffplug.rcpdemo'))

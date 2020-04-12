@@ -1,4 +1,4 @@
 dependencies {
-	compile "com.google.guava:guava:18.0"
+	implementation "com.google.guava:guava:18.0"
 }
 jar.manifest.attributes('-exportcontents': 'needs18')

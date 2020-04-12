@@ -1,8 +1,10 @@
 dependencies {
-	compile "com.diffplug.durian:durian-core:${VER_DURIAN}"
-	compile "com.diffplug.durian:durian-collect:${VER_DURIAN}"
-	compile "com.diffplug.durian:durian-rx:${VER_DURIAN_RX}"
-	compile "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
+	implementation "com.diffplug.durian:durian-core:${VER_DURIAN}"
+	implementation "com.diffplug.durian:durian-collect:${VER_DURIAN}"
+	implementation "com.diffplug.durian:durian-concurrent:${VER_DURIAN}"
+	implementation "com.diffplug.durian:durian-rx:${VER_DURIAN_RX}"
+	implementation "com.diffplug.durian:durian-swt:${VER_DURIAN_SWT}"
+	implementation "io.reactivex:rxjava:${VER_RXJAVA}"
 
-	testCompile "junit:junit:${VER_JUNIT}"
+	testImplementation "junit:junit:${VER_JUNIT}"
 }
