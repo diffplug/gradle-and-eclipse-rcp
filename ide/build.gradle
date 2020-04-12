@@ -4,7 +4,7 @@
 apply plugin: 'com.diffplug.oomph.ide'
 oomphIde {
 	splash '../_imgs/titlecard.png'
-	repoEclipse '4.6.2'
+	repoEclipseLatest()
 	pde {
 		targetplatform {
 			it.installation '../target.maven/build'
