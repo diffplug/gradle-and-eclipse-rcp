@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':com.diffplug.needs17')
-	compile project(':com.diffplug.needs18')
+	implementation project(':com.diffplug.needs17')
+	implementation project(':com.diffplug.needs18')
 }
 jar.manifest.attributes('-exportcontents': 'needsboth')

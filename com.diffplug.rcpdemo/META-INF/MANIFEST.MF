@@ -12,3 +12,4 @@ Import-Package: com.diffplug.common.base;version="[1.2,2)",com.diffplu
  ion="[1.0,2)",com.google.common.collect;version="[18.0,19)",needsboth
  ;version="[1.0,2)",org.eclipse.equinox.app;version="[1.1,2)",org.ecli
  pse.swt.graphics,org.eclipse.swt.widgets
+
